@@ -45,6 +45,7 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			request.setAttribute("message","");
 			Connection connection = ConnectionObject.createConnection();
 			List list = new List();
 			list.setName(request.getParameter("name"));

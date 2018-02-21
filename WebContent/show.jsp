@@ -38,6 +38,11 @@
 			</tr>
 		</table>
 		<br/>
+		<form method="post" action="ListServlet">
+		<input type="submit" value="view list">
+		</form>
+	   <br/>
+	   <br/>
 		<form method="get" action="EditServlet">
 			<input type="hidden" name="editId" value="<%=request.getAttribute("taskId") %>"/>
 			<button type="submit">Edit</button>

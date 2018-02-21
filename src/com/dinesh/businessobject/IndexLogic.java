@@ -97,4 +97,51 @@ public class IndexLogic {
 		return true;
 		
 	}
+	public static List edit(Connection connection, String edit) {
+		List list = new List();
+		try{
+			String sql = "Select task_id,name,date,content,priority from todo_lists where task_id = (?)";
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setInt(1, Integer.parseInt(edit));
+			ResultSet rs  = pst.executeQuery();
+			while(rs.next()){
+				list.setName(rs.getString("name"));
+				list.setDate(rs.getDate("date"));
+				list.setContent(rs.getString("content"));
+				list.setPriority(rs.getInt("priority"));
+				list.setTaskId(rs.getInt("task_id"));
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			System.out.println("Cancelled");
+		}
+		
+		
+		
+		return list;
+	}
+	public static Boolean save(Connection connection, String save,List list) {
+		try{
+			String sql = "Update todo_lists set name=(?),date=(?),content=(?),priority=(?),added_at=(?) where task_id = (?)";
+			PreparedStatement pst = connection.prepareStatement(sql);
+			pst.setString(1, list.getName());
+			pst.setDate(2, new Date(list.getDate().getTime()));
+			pst.setString(3, list.getContent());
+			pst.setInt(4, list.getPriority());
+			pst.setDate(5, new Date(list.getAddedAt().getTime()));
+			pst.setInt(6, Integer.parseInt(save));
+			int rs = pst.executeUpdate();
+			if(rs>0){
+				ConnectionObject.closeConnection();
+				return true;
+			}else{
+				return false;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return true;
+	}
 }
