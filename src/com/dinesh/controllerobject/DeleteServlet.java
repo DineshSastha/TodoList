@@ -33,6 +33,7 @@ public class DeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("message","");
 		Connection connection = ConnectionObject.createConnection();
 		String delete = request.getParameter("deleteId");
 		Boolean condition = IndexLogic.delete(connection,delete);
