@@ -49,7 +49,7 @@ public class SaveServlet extends HttpServlet {
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					} 
 					list.setContent(request.getParameter("content"));
 					list.setAddedAt(Calendar.getInstance().getTime());
 					Boolean condition = IndexLogic.save(connection,save,list);
