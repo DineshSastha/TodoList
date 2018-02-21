@@ -37,6 +37,10 @@
   	 		    </tr>
   	 		<% } %>
   	 </table>
+  	 <br/>
+		<a href="index.jsp"><button type="submit">Tap here to add a List</button></a>
+	<br/>
+	    <h4>Note:</h4><p>Click on corresponding TaskId to view your List</p>
   	 
 </body>
 </html>

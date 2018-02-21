@@ -7,6 +7,9 @@
 <title>ToDo List</title>
 </head>
 <body>
+	<% if((request.getAttribute("message")!= null) && (request.getAttribute("message").equals("")) ){ %>
+    <h1 style="color:red"><%= request.getAttribute("message") %></h1>
+    <%} %>
 	<form method="post" action="IndexServlet">
 	    <h1 style="background-color:blue;text-align:center">TODO LIST</h1>
 	

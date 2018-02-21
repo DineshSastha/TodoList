@@ -7,6 +7,9 @@
 <title>Show Details</title>
 </head>
 <body>
+<% if((request.getAttribute("message")!= null) && (request.getAttribute("message").equals("")) ){ %>
+    <h1 style="color:blue"><%= request.getAttribute("message") %></h1>
+    <%} %>
 		<table>
 			<caption style="color:red">Show Lists</caption>
 			<tr>

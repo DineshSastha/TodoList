@@ -31,7 +31,7 @@ public class IndexLogic {
 				return false;
 			}
 			ConnectionObject.closeConnection();
-			return false; 
+			return true; 
 	}
 	public static LinkedList<List> getList(Connection connection){
 		List list;
@@ -80,15 +80,21 @@ public class IndexLogic {
 		return list;
 		
 	}
-	public static List delete(Connection connection, String delete) {
+	public static Boolean delete(Connection connection, String delete) {
 		try{
-			String sql = "Delete * from todo_lists where task_id=(?)";
+			String sql = "Delete from todo_lists where task_id=(?)";
 			PreparedStatement pst = connection.prepareStatement(sql);
 			pst.setInt(1, Integer.parseInt(delete));
 			int rs = pst.executeUpdate();
+			if(rs>0){
+				ConnectionObject.closeConnection();
+				return true;
+			}
 		}catch(Exception e){
 			e.printStackTrace();
+			return false;
 		}
-		return null;
+		return true;
+		
 	}
 }

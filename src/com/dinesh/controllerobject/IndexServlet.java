@@ -64,10 +64,12 @@ public class IndexServlet extends HttpServlet {
 			RequestDispatcher rd = null;
 			if(condition){
 				rd = request.getRequestDispatcher("/index.jsp");
+				request.setAttribute("message", "List added Successfully!!");
 				rd.include(request, response);
 			}
 			else{
 				rd=request.getRequestDispatcher("/index.jsp");
+				request.setAttribute("message", "List not added!!!");
 				rd.include(request, response);
 			}
 	}

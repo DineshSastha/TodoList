@@ -3,6 +3,7 @@ package com.dinesh.controllerobject;
 import java.io.IOException;
 import java.sql.Connection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,11 +35,18 @@ public class DeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection connection = ConnectionObject.createConnection();
 		String delete = request.getParameter("deleteId");
-		List list = IndexLogic.delete(connection,delete);
-		
-		
-		
-		
+		Boolean condition = IndexLogic.delete(connection,delete);
+		RequestDispatcher rd = null;
+		if(condition){
+			rd = request.getRequestDispatcher("/index.jsp");
+			request.setAttribute("message", "Selected List Deleted Successfully!!");
+			rd.include(request, response);
+		}
+		else{
+			rd = request.getRequestDispatcher("/show.jsp");
+			request.setAttribute("message","Something went Wrong");
+			rd.include(request, response);
+		}
 		
 	}
 
