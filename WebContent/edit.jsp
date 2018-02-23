@@ -8,7 +8,7 @@
 <title>Edit Your List</title>
 </head>
 <body>
-		<form method="get" action="SaveServlet">
+		<form method="get" action="SaveServlet" onsubmit="return validate()">
 		<% List<String> selectedList = new ArrayList<String>();
 			selectedList.add("1");
 			selectedList.add("2");
@@ -18,15 +18,15 @@
 		%>
 	    <h1 style="background-color:blue;text-align:center"> Edit your TODO LIST</h1>
 	
-		<h3 style="text-align:center">Title:   <input type="text"  name="name" value="<%=request.getAttribute("name") %>" /></h3>
+		<h3 style="text-align:center">Title:   <input type="text"  size="50" maxlength="250" autofocus="autofocus" pattern="[A-Za-z]+" id = "name" name="name" value="<%=request.getAttribute("name") %>" /></h3><label id = "titleError"></label>
 		<br/>
-		<h3 style="text-align:center">Date:   <input type="date"   name="date" value="<%=request.getAttribute("date")%>" /></h3>
+		<h3 style="text-align:center">Date:   <input type="date"   id = "date" name="date" value="<%=request.getAttribute("date")%>" /></h3><label id = "dateError"></label>
 		<br/>
-		<h3 style="text-align:center">Content:  <br> <textarea cols="50" rows="10"  name="content" >
-			<%=request.getAttribute("content").toString() %></textarea><br></h3><br/>
+		<h3 style="text-align:center">Content:  <br> <textarea id="content" cols="50" rows="10"  name="content" maxlength="1000" >
+			<%=request.getAttribute("content").toString() %></textarea><br></h3><label id="contentError"></label><br/>
 		<br/>
 		<h3 style="text-align:center">Priority :  
-		<select name="priority">
+		<select name="priority" id = "priority">
 		<% String abc =request.getAttribute("priority").toString();
 			System.out.println(abc);
 			System.out.println(selectedList);
@@ -38,11 +38,13 @@
 				}
 			}
 		%>
-		</select>
+		</select><label id="priorityError"></label>
 		</h3>
 		<br/>
 		<input type="hidden" name="saveId" value="<%=request.getAttribute("taskId") %>"/>
 		<p style="text-align:center"><button type="submit">Save</button></p>
 	</form>
+	<script src="js/validate.js">
+	</script>
 </body>
 </html>
